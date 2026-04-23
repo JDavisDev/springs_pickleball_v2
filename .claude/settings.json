@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.springspickleball.com\" -o /tmp/sp_home.html -w \"HTTP_STATUS:%{http_code}\\\\n\")",
+      "Read(//private/tmp/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -sL -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36\" \"https://www.springspickleball.com/book-a-court/\" -o /tmp/sp_bookwest.html -w \"HTTP:%{http_code}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0 Chrome/120.0.0.0 Safari/537.36\" \"https://www.springspickleball.com/book-a-court-east/\" -o /tmp/sp_bookeast.html -w \"HTTP:%{http_code}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://springspickleball.com/wp-content/uploads/2022/06/SpringsPickleball_square.png\" -o /Users/jordan/springs_pickleball_v2/images/logo.png)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.springspickleball.com/frequently-asked-questions/\" -o /tmp/sp_faq.html -w \"FAQ: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(python3)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?releaseDate=1702252800\" -o app-store-badge.svg -w \"Apple: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png\" -o google-play-badge.png -w \"Google: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.springspickleball.com/memberships/\" -o /tmp/sp_mem_fresh.html -w \"SP memberships: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://app.courtreserve.com/Online/Memberships/Public/8778\" -o /tmp/cr_west.html -w \"CR West: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://app.courtreserve.com/Online/Memberships/Public/15687\" -o /tmp/cr_east.html -w \"CR East: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://app.courtreserve.com/Online/Memberships/ViewPublicMembership/8778?membershipId=253681\" -o /tmp/cr_summer_w.html -w \"Summer W: %{http_code} %{size_download}B\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://app.courtreserve.com/Online/Memberships/ViewPublicMembership/15687?membershipId=253683\" -o /tmp/cr_summer_e.html -w \"Summer E: %{http_code} %{size_download}B\\\\n\")"
+    ]
+  }
+}
