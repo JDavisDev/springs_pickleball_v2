@@ -45,6 +45,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // PostHog: named events for the booking funnel
+  function detectSource(el) {
+    if (el.closest('.mobile-book-bar')) return 'mobile_bar';
+    if (el.closest('.hero')) return 'hero';
+    if (el.closest('.promo-banner')) return 'promo_banner';
+    if (el.closest('.loc-card')) return 'location_card';
+    if (el.closest('.megamenu') || el.closest('.submenu')) return 'nav';
+    if (el.closest('.cta-band')) return 'cta_band';
+    if (el.closest('.site-footer')) return 'footer';
+    if (el.closest('.card')) return 'card';
+    return 'other';
+  }
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a || !a.href || !window.posthog) return;
+    const href = a.href;
+    const source = detectSource(a);
+
+    // Court booking clicks
+    if (href.includes('publicbookings/8778')) {
+      window.posthog.capture('book_court_clicked', { location: 'west', kind: 'guest', source });
+    } else if (href.includes('publicbookings/15687')) {
+      window.posthog.capture('book_court_clicked', { location: 'east', kind: 'guest', source });
+    } else if (href.includes('EmbedCode/8778/24144')) {
+      window.posthog.capture('book_court_clicked', { location: 'west', kind: 'member_schedule', source });
+    } else if (href.includes('EmbedCode/15687/45222')) {
+      window.posthog.capture('book_court_clicked', { location: 'east', kind: 'member_schedule', source });
+    }
+
+    // Membership signup clicks
+    if (href.includes('membershipId=253681')) {
+      window.posthog.capture('membership_signup_clicked', { location: 'west', promo: 'summer_special', source });
+    } else if (href.includes('membershipId=253683')) {
+      window.posthog.capture('membership_signup_clicked', { location: 'east', promo: 'summer_special', source });
+    } else if (href.includes('Memberships/Public/8778')) {
+      window.posthog.capture('membership_signup_clicked', { location: 'west', source });
+    } else if (href.includes('Memberships/Public/15687')) {
+      window.posthog.capture('membership_signup_clicked', { location: 'east', source });
+    }
+  });
+
   // Scroll reveal
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
