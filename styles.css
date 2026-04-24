@@ -306,7 +306,7 @@ img { max-width: 100%; height: auto; display: block; }
   text-align: center;
   background:
     linear-gradient(rgba(255,255,255,0.82), rgba(242,247,243,0.94)),
-    url('images/courts-hero.jpg') center/cover no-repeat;
+    url('images/east-primary-overview-people.jpg') center/cover no-repeat;
   padding: 6rem 0 7rem;
   overflow: hidden;
 }
@@ -558,7 +558,7 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
 .cta-band {
   background:
     linear-gradient(rgba(255,255,255,0.88), rgba(242,247,243,0.94)),
-    url('images/facility-east.jpg') center/cover no-repeat;
+    url('images/east-patio-court-people.jpg') center/cover no-repeat;
   color: var(--black);
   padding: 4rem 0;
   border-top: 1px solid #e4ebe5;
@@ -810,7 +810,7 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   padding: 4.5rem 0 3.75rem;
   background:
     linear-gradient(rgba(255,255,255,0.88), rgba(242,247,243,0.96)),
-    url('images/courts-hero.jpg') center/cover no-repeat;
+    url('images/east-primary-overview-people.jpg') center/cover no-repeat;
   border-bottom: 1px solid #e4ebe5;
 }
 .page-head .container { position: relative; z-index: 1; }
