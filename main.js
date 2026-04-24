@@ -57,32 +57,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (el.closest('.card')) return 'card';
     return 'other';
   }
+  function track(name, props) {
+    if (!window.posthog || !window.posthog.capture) return;
+    window.posthog.capture(name, props);
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.log('[posthog]', name, props);
+    }
+  }
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a');
-    if (!a || !a.href || !window.posthog) return;
+    if (!a || !a.href) return;
     const href = a.href;
     const source = detectSource(a);
 
     // Court booking clicks
     if (href.includes('publicbookings/8778')) {
-      window.posthog.capture('book_court_clicked', { location: 'west', kind: 'guest', source });
+      track('book_court_clicked', { location: 'west', kind: 'guest', source });
     } else if (href.includes('publicbookings/15687')) {
-      window.posthog.capture('book_court_clicked', { location: 'east', kind: 'guest', source });
+      track('book_court_clicked', { location: 'east', kind: 'guest', source });
     } else if (href.includes('EmbedCode/8778/24144')) {
-      window.posthog.capture('book_court_clicked', { location: 'west', kind: 'member_schedule', source });
+      track('book_court_clicked', { location: 'west', kind: 'member_schedule', source });
     } else if (href.includes('EmbedCode/15687/45222')) {
-      window.posthog.capture('book_court_clicked', { location: 'east', kind: 'member_schedule', source });
+      track('book_court_clicked', { location: 'east', kind: 'member_schedule', source });
+    }
+
+    // Memberships page navigation (nav tab, hero CTA, footer, etc.)
+    if (/\/memberships\.html(?:[?#]|$)/.test(href) || href.endsWith('memberships.html')) {
+      track('memberships_clicked', { source, page: window.location.pathname });
     }
 
     // Membership signup clicks
     if (href.includes('membershipId=253681')) {
-      window.posthog.capture('membership_signup_clicked', { location: 'west', promo: 'summer_special', source });
+      track('membership_signup_clicked', { location: 'west', promo: 'summer_special', source });
     } else if (href.includes('membershipId=253683')) {
-      window.posthog.capture('membership_signup_clicked', { location: 'east', promo: 'summer_special', source });
+      track('membership_signup_clicked', { location: 'east', promo: 'summer_special', source });
     } else if (href.includes('Memberships/Public/8778')) {
-      window.posthog.capture('membership_signup_clicked', { location: 'west', source });
+      track('membership_signup_clicked', { location: 'west', source });
     } else if (href.includes('Memberships/Public/15687')) {
-      window.posthog.capture('membership_signup_clicked', { location: 'east', source });
+      track('membership_signup_clicked', { location: 'east', source });
     }
   });
 
