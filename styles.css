@@ -1,6 +1,7 @@
 :root {
   --main: #b3da2d;
   --main-dark: #9dbd2d;
+  --green-deep: #5a8a15;
   --accent: #2a7bc7;
   --accent-dark: #1f63a6;
   --black: #10181a;
@@ -101,9 +102,12 @@ img { max-width: 100%; height: auto; display: block; }
 .nav > a.logo { display: inline-flex; align-items: center; gap: 0.6rem; }
 .nav a { color: var(--black); }
 .logo img {
-  height: 64px;
+  height: 88px;
   width: auto;
   display: block;
+}
+@media (max-width: 640px) {
+  .logo img { height: 64px; }
 }
 
 .nav-links {
@@ -154,7 +158,7 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 999px;
   transition: background 0.15s, color 0.15s;
 }
-.nav-cta:hover { background: var(--accent); color: var(--white) !important; }
+.nav-cta:hover { background: var(--main-dark); color: var(--black) !important; }
 
 /* Dropdown (simple) */
 .submenu {
@@ -201,7 +205,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .nav-links > li.open > .megamenu { display: grid; }
 .megamenu h5 {
-  color: var(--accent);
+  color: var(--green-deep);
   font-family: var(--font-head);
   font-size: 0.75rem;
   font-weight: 800;
@@ -289,14 +293,14 @@ img { max-width: 100%; height: auto; display: block; }
   cursor: pointer;
   transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
-.btn:hover { background: var(--accent); color: var(--white); transform: translateY(-1px); }
+.btn:hover { background: var(--main-dark); color: var(--black); transform: translateY(-1px); }
 .btn-outline {
   background: transparent;
   color: var(--white);
   border: 2px solid var(--main);
 }
 .btn-outline:hover { background: var(--main); color: var(--black); border-color: var(--main); }
-.btn-accent { background: var(--accent); color: var(--white); }
+.btn-accent { background: var(--green-deep); color: var(--white); }
 .btn-accent:hover { background: var(--main); color: var(--black); }
 
 /* ===== Hero (image background) ===== */
@@ -305,7 +309,7 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--black);
   text-align: center;
   background:
-    linear-gradient(rgba(255,255,255,0.82), rgba(242,247,243,0.94)),
+    linear-gradient(rgba(255,255,255,0.45), rgba(255,255,255,0.72)),
     url('images/east-primary-overview-people.jpg') center/cover no-repeat;
   padding: 6rem 0 7rem;
   overflow: hidden;
@@ -331,26 +335,27 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 999px;
   margin-bottom: 1rem;
 }
-.hero h1 { color: var(--black); }
-.hero h1 em { color: var(--accent); font-style: normal; }
+.hero h1 { color: var(--black); text-shadow: 0 2px 18px rgba(255,255,255,0.7); }
+.hero h1 em { color: var(--green-deep); font-style: normal; }
 .hero p.lead {
   max-width: 760px;
   margin: 0 auto 2rem;
   font-size: 1.15rem;
-  color: var(--muted);
+  color: var(--black);
+  text-shadow: 0 1px 10px rgba(255,255,255,0.65);
 }
 .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 .hero-ctas .btn-outline { color: var(--black); border-color: var(--black); }
 .hero-ctas .btn-outline:hover { background: var(--main); border-color: var(--main); color: var(--black); }
 .hero-apps { margin-top: 1.5rem; color: var(--muted); font-size: 0.9rem; }
-.hero-apps a { color: var(--accent); text-decoration: underline; font-weight: 700; }
+.hero-apps a { color: var(--green-deep); text-decoration: underline; font-weight: 700; }
 
 /* ===== Sections ===== */
 section.block { padding: 5rem 0; }
 section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-bottom: 1px solid #eef2ef; }
 .section-head { text-align: center; margin-bottom: 2.75rem; }
 .section-head .eyebrow {
-  color: var(--accent);
+  color: var(--green-deep);
   font-family: var(--font-head);
   font-weight: 700;
   text-transform: uppercase;
@@ -514,9 +519,9 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
 
 /* ===== Promo banner ===== */
 .promo-banner {
-  background: linear-gradient(90deg, #eef5fb 0%, #f4faf0 100%);
-  border-top: 3px solid var(--accent);
-  border-bottom: 1px solid #d5e6f3;
+  background: linear-gradient(90deg, #f4faf0 0%, #e9f5d6 100%);
+  border-top: 3px solid var(--main);
+  border-bottom: 1px solid #d8e8b8;
   color: var(--black);
   padding: 1.5rem 0;
 }
@@ -533,31 +538,31 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   color: var(--black);
 }
 .promo-text p { margin: 0; font-size: 0.95rem; color: var(--muted); }
-.promo-text strong { color: var(--accent); }
+.promo-text strong { color: var(--green-deep); }
 .promo-kicker {
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  background: var(--accent);
-  color: var(--white);
+  background: var(--main);
+  color: var(--black);
   padding: 0.2rem 0.65rem;
   border-radius: 999px;
   display: inline-block;
 }
 .promo-ctas { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 .promo-ctas .btn {
-  background: var(--accent);
-  color: var(--white);
+  background: var(--main);
+  color: var(--black);
   padding: 0.7rem 1.4rem;
 }
-.promo-ctas .btn:hover { background: var(--black); color: var(--white); }
+.promo-ctas .btn:hover { background: var(--black); color: var(--main); }
 
 /* ===== Large CTA band ===== */
 .cta-band {
   background:
-    linear-gradient(rgba(255,255,255,0.88), rgba(242,247,243,0.94)),
+    linear-gradient(rgba(255,255,255,0.60), rgba(255,255,255,0.82)),
     url('images/east-patio-court-people.jpg') center/cover no-repeat;
   color: var(--black);
   padding: 4rem 0;
@@ -574,7 +579,7 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
 .cta-band h2 { color: var(--black); margin: 0.35rem 0; }
 .cta-band p { color: var(--muted); max-width: 560px; margin: 0; }
 .cta-band .eyebrow {
-  color: var(--accent);
+  color: var(--green-deep);
   font-family: var(--font-head);
   font-weight: 700;
   text-transform: uppercase;
@@ -687,8 +692,8 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
-  color: var(--white);
+  background: var(--main);
+  color: var(--black);
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 0.8rem;
@@ -809,7 +814,7 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   text-align: center;
   padding: 4.5rem 0 3.75rem;
   background:
-    linear-gradient(rgba(255,255,255,0.88), rgba(242,247,243,0.96)),
+    linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.80)),
     url('images/east-primary-overview-people.jpg') center/cover no-repeat;
   border-bottom: 1px solid #e4ebe5;
 }
@@ -827,8 +832,8 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   border-radius: 999px;
   margin-bottom: 1rem;
 }
-.page-head h1 { color: var(--black); }
-.page-head p { color: var(--muted); max-width: 720px; margin: 0 auto; font-size: 1.05rem; }
+.page-head h1 { color: var(--black); text-shadow: 0 2px 14px rgba(255,255,255,0.7); }
+.page-head p { color: var(--black); max-width: 720px; margin: 0 auto; font-size: 1.05rem; text-shadow: 0 1px 8px rgba(255,255,255,0.65); }
 
 /* ===== Contact form ===== */
 .form { max-width: 640px; margin: 0 auto; }
@@ -902,8 +907,8 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
 /* Savings badge on plan cards */
 .savings-badge {
   display: inline-block;
-  background: var(--accent);
-  color: var(--white);
+  background: var(--main);
+  color: var(--black);
   font-family: var(--font-head);
   font-weight: 700;
   text-transform: uppercase;
@@ -963,7 +968,7 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   background: var(--gray);
 }
 .calc-recommend .eyebrow {
-  color: var(--accent);
+  color: var(--green-deep);
   font-family: var(--font-head);
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -983,8 +988,8 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
 .calc-total small { font-size: 1rem; font-weight: 400; color: var(--muted); }
 .calc-save {
   font-weight: 700;
-  color: var(--white);
-  background: var(--accent);
+  color: var(--black);
+  background: var(--main);
   display: inline-block;
   padding: 0.4rem 0.9rem;
   border-radius: 999px;
@@ -1091,7 +1096,7 @@ section.block.alt { background: #fafcfa; border-top: 1px solid #eef2ef; border-b
   transition: transform 0.2s;
   flex-shrink: 0;
 }
-.faq-item[open] summary::after { transform: rotate(-135deg); border-color: var(--accent); }
+.faq-item[open] summary::after { transform: rotate(-135deg); border-color: var(--green-deep); }
 .faq-item summary:hover { color: var(--accent); }
 .faq-item .faq-answer {
   padding: 0 1.4rem 1.25rem;
