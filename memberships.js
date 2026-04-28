@@ -9,88 +9,37 @@ const SIGNUP = {
 };
 
 const PLANS = {
-  guest: {
-    name: 'Free Guest Account',
-    category: 'single',
-    featured: false,
-    prices: {
-      monthly: { amount: 0, label: 'free' },
-    },
-    description: 'Create a free guest account, sign the waiver, and book courts and events at both locations.',
-    perks: [
-      'Free basic paddle rental',
-      'Lowest guest court and open play prices',
-      '3-day advance booking',
-      'Access to leagues, socials, tournaments, and events',
-    ],
-  },
-  summer_unlimited: {
-    name: 'Summer 3-Month Unlimited',
-    category: 'single',
-    featured: true,
-    prices: {
-      summer: { amount: 249, label: 'one time', billingText: '$83/mo equivalent' },
-    },
-    description: 'Unlimited play for 3 months, including open play and doubles court rentals.',
-    perks: [
-      '3 months of Unlimited membership for $249',
-      'Free 2-hour open play sessions',
-      'Free court rentals for doubles play',
-      '50% off leagues, socials, and in-house tournaments',
-      'Works at West and East',
-    ],
-  },
   flex: {
     name: 'Flex',
-    category: 'single',
-    prices: {
-      annual: { amount: 39, label: '/mo', billingText: 'annual commitment, billed monthly', compareAt: 49 },
-      monthly: { amount: 49, label: '/mo', billingText: 'month to month' },
+    variants: {
+      single: {
+        annual: { name: 'Single Flex Annual Membership', amount: 39, label: '/mo', billingText: 'normally $49/mo' },
+        monthly: { name: 'Single Flex Month to Month Membership', amount: 49, label: '/mo', billingText: 'no annual contract' },
+      },
+      couples: {
+        annual: { name: 'Couples Flex Annual Membership', amount: 69, label: '/mo', billingText: 'normally $98/mo' },
+      },
     },
-    description: 'Save 50% on open play and court rentals, with 7-day advance registration.',
+    description: 'Save 50% on open play and court rentals, with early 7-day registration access.',
     perks: [
       '50% off court rentals and open play',
-      '7-day advance registration',
+      '7-day advance registration for prime open play and court spots',
       'Free paddle demos and 10% account credit on paddle purchases',
       'Free access to dink room, gym, and shower rooms',
       'Discounts on leagues and Springs Pickleball-run tournaments',
     ],
   },
-  youth_unlimited: {
-    name: 'Youth Unlimited',
-    category: 'single',
-    prices: {
-      annual: { amount: 79, label: '/mo', billingText: 'annual commitment, billed monthly', compareAt: 119 },
-    },
-    description: 'Unlimited membership for youth ages 8 to 18.',
-    perks: [
-      'Free open play and doubles court rentals',
-      '9-day advance reservations',
-      'Built for youth players ages 8 to 18',
-      'Works at West and East',
-    ],
-  },
-  couples_flex: {
-    name: 'Couples Flex',
-    category: 'couples',
-    prices: {
-      annual: { amount: 69, label: '/mo', billingText: 'annual commitment, billed monthly', compareAt: 98 },
-    },
-    description: 'Both players save 50% on open play and court rentals, with 7-day advance registration.',
-    perks: [
-      '50% off court rentals and open play for each person',
-      '7-day advance booking',
-      'Works at West and East',
-      'Free access to dink room, gym, and shower rooms',
-    ],
-  },
   unlimited: {
     name: 'Unlimited',
-    category: 'single',
     featured: true,
-    prices: {
-      annual: { amount: 99, label: '/mo', billingText: 'annual commitment, billed monthly', compareAt: 139 },
-      monthly: { amount: 129, label: '/mo', billingText: 'month to month' },
+    variants: {
+      single: {
+        annual: { name: 'Single Unlimited Annual Membership Special', amount: 99, label: '/mo', billingText: 'normally $139/mo' },
+        monthly: { name: 'Single Unlimited Month to Month Membership', amount: 129, label: '/mo', billingText: 'no annual contract' },
+      },
+      couples: {
+        annual: { name: 'Couples Unlimited Annual Membership Special', amount: 189, label: '/mo', billingText: 'normally $269/mo' },
+      },
     },
     description: 'Never pay for open play or doubles court rentals, with 9-day advance reservations.',
     perks: [
@@ -98,37 +47,24 @@ const PLANS = {
       'Free open play sessions',
       '9-day advance reservations',
       'Free drilling and singles time when courts are available',
-      '50% off leagues, round robins &amp; tournaments',
-    ],
-  },
-  couples_unlimited: {
-    name: 'Couples Unlimited',
-    category: 'couples',
-    featured: true,
-    prices: {
-      annual: { amount: 189, label: '/mo', billingText: 'annual commitment, billed monthly', compareAt: 269 },
-    },
-    description: 'Unlimited play for two people, including open play and doubles court rentals.',
-    perks: [
-      'Free open play and court rentals',
-      '10-day advance registration',
-      '50% off leagues and Springs Pickleball-run tournaments',
-      'Free access to dink room, gym, and shower rooms',
+      '50% off Springs Pickleball leagues and tournaments',
     ],
   },
   unlimited_plus: {
     name: 'Unlimited+',
-    category: 'single',
-    prices: {
-      annual: { amount: 139, label: '/mo', billingText: 'annual commitment, billed monthly', compareAt: 169 },
+    variants: {
+      single: {
+        annual: { name: 'Single Unlimited+ Annual Membership Special', amount: 139, label: '/mo', billingText: 'normally $169/mo' },
+      },
+      couples: {},
     },
-    description: 'The ultimate membership with free open play, doubles court rentals, leagues, tournaments, clinics, and guest passes.',
+    description: 'The ultimate membership with free court rentals, open play, leagues, tournaments, clinics, and guest passes.',
     perks: [
       'Free open play and court rentals for doubles play',
       'Free Springs Pickleball-hosted leagues and tournaments',
       '1 free clinic per month ($30 value)',
-      'Guest passes included',
       '10-day advance reservations',
+      'Guest passes included',
     ],
   },
 };
@@ -155,22 +91,20 @@ const FLEX_RATES = {
 const state = { billing: 'annual', party: 'single' };
 
 function planVariant(plan) {
-  return plan.prices[state.billing];
+  return plan.variants[state.party]?.[state.billing] || null;
 }
 
-function planAnnualCost(plan, billing = state.billing) {
-  const variant = plan.prices[billing];
+function planAnnualCost(plan, billing = state.billing, party = state.party) {
+  const variant = plan.variants[party]?.[billing] || null;
   if (!variant) return null;
-  return billing === 'summer' ? variant.amount : variant.amount * 12;
-}
-
-function annualSavings(plan) {
-  const variant = planVariant(plan);
-  if (!variant || !variant.compareAt) return 0;
-  return Math.max(0, (variant.compareAt - variant.amount) * 12);
+  return variant.amount * 12;
 }
 
 function money(n) {
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function moneyMonthly(n) {
   return '$' + Math.round(n).toLocaleString();
 }
 
@@ -179,26 +113,18 @@ function renderPlans() {
   if (!grid) return;
   grid.innerHTML = '';
 
-  const visiblePlans = Object.entries(PLANS).filter(([, plan]) => {
-    return plan.category === state.party && planVariant(plan);
-  });
-
-  if (!visiblePlans.length) {
-    grid.innerHTML = '<div class="plan empty-plan"><h3>No current option</h3><p>There is not a currently listed membership for this billing and player type. Choose another toggle or register through CourtReserve to see all available options.</p></div>';
-    return;
-  }
-
-  visiblePlans.forEach(([key, plan]) => {
+  Object.entries(PLANS).forEach(([key, plan]) => {
     const variant = planVariant(plan);
-    const savings = annualSavings(plan);
+    const unavailable = !variant;
 
     const el = document.createElement('div');
-    el.className = 'plan' + (plan.featured ? ' featured' : '');
+    el.className = 'plan' + (plan.featured ? ' featured' : '') + (unavailable ? ' unavailable' : '');
     el.innerHTML = `
       <h3>${plan.name}</h3>
-      <div class="price">${money(variant.amount)}<small>${variant.label}</small></div>
-      ${variant.billingText ? `<p class="plan-note">${variant.billingText}</p>` : ''}
-      ${savings > 0 ? `<div class="savings-badge">Save ${money(savings)}/yr</div>` : ''}
+      ${variant ? `<div class="price">${money(variant.amount)}<small>${variant.label}</small></div>` : '<div class="price price-unavailable">Not listed</div>'}
+      ${variant?.name ? `<p class="plan-variant">${variant.name}</p>` : ''}
+      ${variant?.billingText ? `<p class="plan-note">${variant.billingText}</p>` : ''}
+      ${unavailable ? '<p class="plan-note">This combination is not currently listed on CourtReserve.</p>' : ''}
       ${plan.description ? `<p>${plan.description}</p>` : ''}
       <ul>${plan.perks.map(p => `<li>${p}</li>`).join('')}</ul>
       <div class="plan-ctas">
@@ -253,11 +179,10 @@ function calculate() {
     yearlyLeagues * GUEST_RATES.league +
     yearlyTourneys * GUEST_RATES.tournament;
 
-  // Cost under each plan uses current annual-special pricing from CourtReserve.
-  const flexPlan = couples ? PLANS.couples_flex : PLANS.flex;
-  const unlimitedPlan = couples ? PLANS.couples_unlimited : PLANS.unlimited;
+  // Cost under each plan uses current annual pricing from CourtReserve.
+  const party = couples ? 'couples' : 'single';
 
-  const flexMembership = planAnnualCost(flexPlan, 'annual');
+  const flexMembership = planAnnualCost(PLANS.flex, 'annual', party);
   const flexUsage =
     yearlyOpenPlay * FLEX_RATES.openPlay +
     yearlyCourtHrs * FLEX_RATES.courtPerHr +
@@ -265,42 +190,65 @@ function calculate() {
     yearlyTourneys * FLEX_RATES.tournament;
   const flexTotal = flexMembership + flexUsage;
 
-  const unlimitedMembership = planAnnualCost(unlimitedPlan, 'annual');
+  const unlimitedMembership = planAnnualCost(PLANS.unlimited, 'annual', party);
   const unlimitedUsage =
-    yearlyLeagues * FLEX_RATES.league * 0.5 + // 50% off leagues
-    yearlyTourneys * FLEX_RATES.tournament * 0.5;
+    yearlyLeagues * GUEST_RATES.league * 0.5 + // 50% off leagues
+    yearlyTourneys * GUEST_RATES.tournament * 0.5;
   const unlimitedTotal = unlimitedMembership + unlimitedUsage;
 
   const options = [
     { key: 'guest', name: 'Pay as Guest', total: guestYearly },
-    { key: 'flex', name: `${flexPlan.name} (Annual Special)`, total: flexTotal },
-    { key: 'unlimited', name: `${unlimitedPlan.name} (Annual Special)`, total: unlimitedTotal },
+    { key: 'flex', name: PLANS.flex.variants[party].annual.name || PLANS.flex.name, total: flexTotal },
+    { key: 'unlimited', name: PLANS.unlimited.variants[party].annual.name || PLANS.unlimited.name, total: unlimitedTotal },
   ];
 
-  if (!couples) {
-    const plusTotal = planAnnualCost(PLANS.unlimited_plus, 'annual'); // leagues & tournaments free
-    options.push({ key: 'unlimited_plus', name: 'Unlimited+ (Annual Special)', total: plusTotal });
+  const plusMembership = planAnnualCost(PLANS.unlimited_plus, 'annual', party);
+  if (plusMembership !== null) {
+    options.push({
+      key: 'unlimited_plus',
+      name: PLANS.unlimited_plus.variants[party].annual.name || PLANS.unlimited_plus.name,
+      total: plusMembership,
+    });
   }
 
   options.sort((a, b) => a.total - b.total);
 
   const best = options[0];
   const vsGuest = guestYearly - best.total;
+  const guestMonthly = guestYearly / 12;
+  const bestMonthly = best.total / 12;
+  const monthlySavings = Math.max(0, vsGuest / 12);
+  const bestIsMembership = best.key !== 'guest';
 
   const out = document.getElementById('calc-result');
   out.innerHTML = `
     <div class="calc-recommend">
       <span class="eyebrow">Best Match</span>
       <h3>${best.name}</h3>
-      <p class="calc-total">${money(best.total)}<small>/year</small></p>
-      ${best.key !== 'guest' && vsGuest > 0 ? `<p class="calc-save">Saves ~${money(vsGuest)} vs. paying as a guest</p>` : ''}
+      <p class="calc-total">${moneyMonthly(bestMonthly)}<small>/mo estimated</small></p>
+      ${bestIsMembership && monthlySavings > 0 ? `<p class="calc-save">Save about ${moneyMonthly(monthlySavings)}/mo vs. guest pricing</p>` : ''}
+      ${!bestIsMembership ? '<p class="calc-save muted">Guest pricing is currently your lowest estimate.</p>' : ''}
+    </div>
+    <div class="calc-snapshot">
+      <div>
+        <span>Guest pricing</span>
+        <strong>${moneyMonthly(guestMonthly)}<small>/mo</small></strong>
+      </div>
+      <div>
+        <span>Your best plan</span>
+        <strong>${moneyMonthly(bestMonthly)}<small>/mo</small></strong>
+      </div>
+      <div>
+        <span>Monthly savings</span>
+        <strong>${monthlySavings > 0 ? moneyMonthly(monthlySavings) : '$0'}<small>/mo</small></strong>
+      </div>
     </div>
     <div class="calc-breakdown">
-      <h4>All options, ranked:</h4>
+      <h4>Estimated monthly cost:</h4>
       <ol>
-        ${options.map(o => `<li><strong>${o.name}</strong> — ${money(o.total)}/yr</li>`).join('')}
+        ${options.map(o => `<li><strong>${o.name}</strong> — ${moneyMonthly(o.total / 12)}/mo <span>(${money(o.total)}/yr)</span></li>`).join('')}
       </ol>
-      <p class="calc-note">Estimates based on current listed rates. Prime-time and weekend pricing may vary.</p>
+      <p class="calc-note">Estimates use current listed annual membership pricing and standard guest rates. Prime-time, weekend, and event-specific pricing may vary.</p>
     </div>
   `;
   out.style.display = 'block';

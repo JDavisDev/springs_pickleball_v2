@@ -70,7 +70,7 @@ img { max-width: 100%; height: auto; display: block; }
 .utility-social { display: flex; gap: 0.75rem; align-items: center; }
 .utility-social a {
   display: inline-flex;
-  width: 26px; height: 26px;
+  width: 30px; height: 30px;
   align-items: center; justify-content: center;
   border: 1px solid #d0d8d1;
   border-radius: 999px;
@@ -82,7 +82,7 @@ img { max-width: 100%; height: auto; display: block; }
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .utility-social a:hover { background: var(--main); color: var(--black); border-color: var(--main); }
-.utility-social svg { width: 13px; height: 13px; display: block; }
+.utility-social svg { width: 16px; height: 16px; display: block; }
 
 /* ===== Site header with mega-menu ===== */
 .site-header {
@@ -860,6 +860,44 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
 }
 .app-panel h2 { color: var(--white); margin-top: 0.3rem; }
 .app-panel p { color: rgba(255,255,255,0.82); max-width: 640px; margin: 0; }
+.app-social {
+  min-width: 240px;
+  max-width: 320px;
+}
+.app-social span {
+  display: block;
+  color: var(--main);
+  font-family: var(--font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  margin-bottom: 0.25rem;
+}
+.app-social p {
+  font-size: 0.9rem;
+  margin-bottom: 0.85rem;
+}
+.app-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.app-social-links a {
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.32);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.app-social-links a:hover {
+  background: var(--main);
+  border-color: var(--main);
+  color: var(--black);
+}
 
 /* ===== Large CTA band ===== */
 .cta-band {
@@ -1041,6 +1079,21 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   font-size: 1rem;
   font-weight: 400;
   color: var(--muted);
+}
+.plan.unavailable {
+  border-style: dashed;
+}
+.plan .price-unavailable {
+  font-size: 2rem;
+  color: var(--muted);
+}
+.plan-variant {
+  margin: -0.5rem 0 0.85rem;
+  color: var(--accent);
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .plan-note {
   margin: -0.65rem 0 0.85rem;
@@ -1303,6 +1356,9 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   border-radius: 12px;
   background: var(--gray);
 }
+.calc-recommend {
+  text-align: center;
+}
 .calc-recommend .eyebrow {
   color: var(--green-deep);
   font-family: var(--font-head);
@@ -1317,7 +1373,7 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
 }
 .calc-total {
   font-family: var(--font-head);
-  font-size: 2rem;
+  font-size: 2.6rem;
   font-weight: 900;
   margin: 0.25rem 0;
 }
@@ -1331,6 +1387,42 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   border-radius: 999px;
   margin: 0.5rem 0 0;
 }
+.calc-save.muted {
+  background: var(--white);
+  border: 1px solid #d0d8d1;
+  color: var(--muted);
+}
+.calc-snapshot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+.calc-snapshot div {
+  background: var(--white);
+  border: 1px solid #dfe7df;
+  border-radius: 8px;
+  padding: 0.9rem;
+}
+.calc-snapshot span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.calc-snapshot strong {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1.55rem;
+  margin-top: 0.2rem;
+}
+.calc-snapshot small {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
 .calc-breakdown {
   margin-top: 1.5rem;
   border-top: 1px solid #d0d8d1;
@@ -1339,7 +1431,17 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
 .calc-breakdown h4 { margin: 0 0 0.5rem; font-size: 1rem; }
 .calc-breakdown ol { margin: 0 0 1rem 1.25rem; padding: 0; }
 .calc-breakdown li { padding: 0.2rem 0; }
+.calc-breakdown li span { color: var(--muted); font-size: 0.9rem; }
 .calc-note { font-size: 0.85rem; color: var(--muted); margin: 0; }
+
+@media (max-width: 640px) {
+  .calc {
+    padding: 1.25rem;
+  }
+  .calc-snapshot {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ===== Scroll reveal ===== */
 .reveal {
