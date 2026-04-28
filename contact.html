@@ -44,7 +44,7 @@
     <a href="index.html" class="logo" aria-label="Springs Pickleball home">
       <img src="images/logo.png" alt="Springs Pickleball">
     </a>
-    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li class="has-dropdown">
@@ -149,7 +149,7 @@
       <span class="eyebrow">Send a Message</span>
       <h2>Get in Touch</h2>
     </div>
-    <form class="form reveal" onsubmit="event.preventDefault(); alert('Form submission is not yet wired up. Add a form handler in main.js or point this form to a service like Formspree.');">
+    <form class="form contact-form reveal">
       <label for="name">Name</label>
       <input id="name" name="name" type="text" required>
 

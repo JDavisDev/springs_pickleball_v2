@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
   if (toggle && links) {
-    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
   }
 
   // Mark active nav link based on current page
@@ -43,7 +46,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!e.target.closest('.nav-links')) {
       document.querySelectorAll('.nav-links > li.open').forEach(x => x.classList.remove('open'));
     }
+    if (toggle && links && !e.target.closest('.site-header')) {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
   });
+
+  // Contact form fallback for the static site.
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const data = new FormData(contactForm);
+      const location = data.get('location');
+      const recipients = {
+        west: 'west@springspickleball.com',
+        east: 'east@springspickleball.com',
+        either: 'west@springspickleball.com,east@springspickleball.com',
+      };
+      const locationLabels = {
+        west: 'West (Vondelpark)',
+        east: 'East (New Center Point)',
+        either: 'Either / Not Sure',
+      };
+      const name = String(data.get('name') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      const message = String(data.get('message') || '').trim();
+      const subject = encodeURIComponent(`Website message from ${name || 'Springs Pickleball visitor'}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nLocation: ${locationLabels[location] || locationLabels.either}\n\n${message}`);
+      window.location.href = `mailto:${recipients[location] || recipients.either}?subject=${subject}&body=${body}`;
+    });
+  }
 
   // PostHog: named events for the booking funnel
   function detectSource(el) {
