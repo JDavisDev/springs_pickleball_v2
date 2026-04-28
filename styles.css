@@ -844,14 +844,9 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   padding: 3rem 0;
 }
 .app-panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
+  display: block;
 }
 .app-copy {
-  flex: 1 1 520px;
   max-width: 720px;
 }
 .app-panel .eyebrow {
