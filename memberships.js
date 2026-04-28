@@ -254,6 +254,22 @@ function calculate() {
   out.style.display = 'block';
 }
 
+function resetCalculator() {
+  ['calc-openplay', 'calc-court', 'calc-leagues', 'calc-tourneys'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) input.value = '0';
+  });
+
+  const couples = document.getElementById('calc-couples');
+  if (couples) couples.checked = false;
+
+  const out = document.getElementById('calc-result');
+  if (out) {
+    out.innerHTML = '';
+    out.style.display = 'none';
+  }
+}
+
 // ---------------------------------------------------------------
 // Init
 // ---------------------------------------------------------------
@@ -263,4 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
   bindToggles();
   const calcBtn = document.getElementById('calc-btn');
   if (calcBtn) calcBtn.addEventListener('click', calculate);
+  const calcReset = document.getElementById('calc-reset');
+  if (calcReset) calcReset.addEventListener('click', resetCalculator);
 });
