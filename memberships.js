@@ -108,6 +108,15 @@ function moneyMonthly(n) {
   return '$' + Math.round(n).toLocaleString();
 }
 
+function trackMembershipEvent(name, props = {}) {
+  if (!window.spTrack) return;
+  window.spTrack(name, {
+    ...props,
+    billing: state.billing,
+    party: state.party,
+  });
+}
+
 function renderPlans() {
   const grid = document.getElementById('plan-grid');
   if (!grid) return;
@@ -132,6 +141,17 @@ function renderPlans() {
         <a href="${SIGNUP.east}" class="btn" target="_blank" rel="noopener">Join at East</a>
       </div>
     `;
+    el.querySelectorAll('.plan-ctas a').forEach(link => {
+      link.addEventListener('click', () => {
+        trackMembershipEvent('membership_plan_cta_clicked', {
+          plan_key: key,
+          plan_name: plan.name,
+          variant_name: variant?.name || null,
+          available: Boolean(variant),
+          location: link.href.includes('/8778') ? 'west' : 'east',
+        });
+      });
+    });
     grid.appendChild(el);
   });
 }
@@ -150,6 +170,10 @@ function bindToggles() {
         b.classList.toggle('active', b.dataset.value === value);
       });
       renderPlans();
+      trackMembershipEvent('membership_toggle_changed', {
+        toggle: group,
+        value,
+      });
     });
   });
 }
@@ -252,6 +276,20 @@ function calculate() {
     </div>
   `;
   out.style.display = 'block';
+
+  trackMembershipEvent('membership_calculator_used', {
+    open_play_sessions_per_week: openPlays,
+    court_hours_per_week: courtHrs,
+    leagues_per_year: leagues,
+    tournaments_per_year: tourneys,
+    couples,
+    best_plan_key: best.key,
+    best_plan_name: best.name,
+    guest_monthly: Math.round(guestMonthly),
+    best_monthly: Math.round(bestMonthly),
+    monthly_savings: Math.round(monthlySavings),
+    annual_savings: Math.round(Math.max(0, vsGuest)),
+  });
 }
 
 function resetCalculator() {
@@ -268,6 +306,8 @@ function resetCalculator() {
     out.innerHTML = '';
     out.style.display = 'none';
   }
+
+  trackMembershipEvent('membership_calculator_reset');
 }
 
 // ---------------------------------------------------------------
