@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
   function detectLinkKind(a, href) {
+    if (href.includes('publicbookings') && href.includes('tab=explore')) return 'events';
     if (href.includes('publicbookings')) return 'court_booking';
     if (href.includes('Memberships/ViewPublicMembership') || href.includes('Memberships/Public')) return 'membership_signup';
     if (href.includes('/Events/') || href.includes('/Leagues/') || href.includes('springspickleballtournaments.com')) return 'events';
@@ -177,9 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Court booking clicks
-    if (href.includes('publicbookings/8778')) {
+    if (href.includes('publicbookings/8778') && !href.includes('tab=explore')) {
       track('book_court_clicked', { location: 'west', kind: 'guest', source, label });
-    } else if (href.includes('publicbookings/15687')) {
+    } else if (href.includes('publicbookings/15687') && !href.includes('tab=explore')) {
       track('book_court_clicked', { location: 'east', kind: 'guest', source, label });
     } else if (href.includes('EmbedCode/8778/24144')) {
       track('book_court_clicked', { location: 'west', kind: 'member_schedule', source, label });

@@ -438,6 +438,11 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   border-radius: 0;
 }
 .section-head p { max-width: 700px; margin: 1rem auto 0; color: var(--muted); }
+.section-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
 
 /* ===== Grid / cards ===== */
 .grid {
