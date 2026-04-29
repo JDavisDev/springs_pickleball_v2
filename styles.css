@@ -447,20 +447,35 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
 .photo-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.35rem;
+  margin: 2.75rem auto 0;
+  max-width: 980px;
 }
 .photo-strip img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 3;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 10px 26px rgba(16,24,26,0.10);
+}
+.photo-strip-compact {
+  max-width: 840px;
+  gap: 1.5rem;
+}
+
+.mini-card-photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 720px) {
   .photo-strip {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 420px;
   }
 }
 
