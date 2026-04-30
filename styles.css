@@ -154,7 +154,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .nav-links > li.open .chev { transform: rotate(180deg); }
 
-.nav-cta {
+.nav-links > li > a.nav-cta {
   background: var(--accent);
   color: var(--white) !important;
   padding: 0.75rem 1.2rem !important;
@@ -162,7 +162,8 @@ img { max-width: 100%; height: auto; display: block; }
   box-shadow: 0 8px 18px rgba(11,84,162,0.22);
   transition: background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
-.nav-cta:hover {
+.nav-links > li > a.nav-cta:hover,
+.nav-links > li > a.nav-cta.active {
   background: var(--accent-dark);
   color: var(--white) !important;
   box-shadow: 0 10px 22px rgba(7,56,109,0.28);
