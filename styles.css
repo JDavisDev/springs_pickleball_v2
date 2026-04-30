@@ -1486,8 +1486,11 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   object-position: center 22%;
   background: var(--gray);
 }
-.instructor-card img.portrait-high {
-  object-position: center 8%;
+.instructor-card img.portrait-lower {
+  object-position: center 38%;
+}
+.instructor-card img.portrait-lower-strong {
+  object-position: center 48%;
 }
 .instructor-body {
   padding: 1.5rem;
