@@ -21,24 +21,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Dropdown / megamenu open-close
   const isDesktop = () => window.matchMedia('(min-width: 981px)').matches;
+  const dropdowns = document.querySelectorAll('.nav-links > li.has-dropdown');
 
-  document.querySelectorAll('.nav-links > li.has-dropdown').forEach(li => {
+  function setDropdownOpen(li, open) {
+    li.classList.toggle('open', open);
+    const trigger = li.querySelector(':scope > a, :scope > button');
+    if (trigger) trigger.setAttribute('aria-expanded', String(open));
+  }
+
+  function closeDropdowns() {
+    dropdowns.forEach(li => setDropdownOpen(li, false));
+  }
+
+  dropdowns.forEach(li => {
     const trigger = li.querySelector(':scope > a, :scope > button');
     if (!trigger) return;
+    trigger.setAttribute('aria-haspopup', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
 
     // Desktop: open on hover
-    li.addEventListener('mouseenter', () => { if (isDesktop()) li.classList.add('open'); });
-    li.addEventListener('mouseleave', () => { if (isDesktop()) li.classList.remove('open'); });
+    li.addEventListener('mouseenter', () => { if (isDesktop()) setDropdownOpen(li, true); });
+    li.addEventListener('mouseleave', () => { if (isDesktop()) setDropdownOpen(li, false); });
 
     // All: toggle on click (for mobile + keyboard)
     trigger.addEventListener('click', e => {
       if (trigger.tagName === 'A' && trigger.getAttribute('href') && trigger.getAttribute('href') !== '#' && isDesktop()) {
         return; // allow link navigation on desktop if href is real
       }
-      e.preventDefault();
       const wasOpen = li.classList.contains('open');
-      document.querySelectorAll('.nav-links > li.open').forEach(x => x.classList.remove('open'));
-      if (!wasOpen) li.classList.add('open');
+      if (trigger.tagName === 'A' && trigger.getAttribute('href') && trigger.getAttribute('href') !== '#' && wasOpen) {
+        return; // second tap on mobile follows the parent page link
+      }
+      e.preventDefault();
+      closeDropdowns();
+      if (!wasOpen) setDropdownOpen(li, true);
       track('nav_dropdown_toggled', {
         label: cleanText(trigger.textContent),
         open: !wasOpen,
@@ -49,9 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Click outside to close
   document.addEventListener('click', e => {
     if (!e.target.closest('.nav-links')) {
-      document.querySelectorAll('.nav-links > li.open').forEach(x => x.classList.remove('open'));
+      closeDropdowns();
     }
     if (toggle && links && !e.target.closest('.site-header')) {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    closeDropdowns();
+    if (toggle && links) {
       links.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
     }
