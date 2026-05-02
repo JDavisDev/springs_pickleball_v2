@@ -477,6 +477,11 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   border-radius: 6px;
   margin-bottom: 1rem;
 }
+.mini-card-photo-contain {
+  object-fit: contain;
+  background: #eef3e8;
+  padding: 1rem;
+}
 
 @media (max-width: 720px) {
   .photo-strip {
