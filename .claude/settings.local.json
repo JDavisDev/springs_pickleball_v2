@@ -102,7 +102,15 @@
       "Bash(sips -g pixelWidth -g pixelHeight \"/private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/7efd4db6-3415-4a04-8fab-27ea36c6342a/scratchpad/shots/mobile_header_zoom2.png\")",
       "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/7efd4db6-3415-4a04-8fab-27ea36c6342a/scratchpad/shots/mobile_full.png\" --window-size=390,500 \"file://$\\(pwd\\)/index.html\")",
       "Bash(sips -g pixelWidth -g pixelHeight \"/private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/7efd4db6-3415-4a04-8fab-27ea36c6342a/scratchpad/shots/mobile_full.png\")",
-      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/7efd4db6-3415-4a04-8fab-27ea36c6342a/scratchpad/shots/orig_mobile_full.png\" --window-size=390,500 \"file:///tmp/orig_check/index.html\")"
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/7efd4db6-3415-4a04-8fab-27ea36c6342a/scratchpad/shots/orig_mobile_full.png\" --window-size=390,500 \"file:///tmp/orig_check/index.html\")",
+      "Bash(sips -g pixelWidth -g pixelHeight sp_membership_promo.png fall-classic.png)",
+      "Bash(xargs -I{} echo {})",
+      "Bash(sips -c 250 390 -o mobile-crop.png --cropOffset 780 0 home-mobile.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight home-mobile.png)",
+      "Bash(sips -c 220 390 --cropOffset 790 0 /private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/12c46b03-1f5d-4af7-8b8f-baec43322c81/scratchpad/home-mobile.png --out /private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/12c46b03-1f5d-4af7-8b8f-baec43322c81/scratchpad/mobile-crop.png)",
+      "Bash(curl -s \"http://localhost:8934/styles.css\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --disk-cache-dir=/dev/null --user-data-dir=/tmp/chrome-profile-test --screenshot=home-mobile3.png --window-size=390,1450 \"http://localhost:8934/index.html?v=$\\(date +%s\\)\")",
+      "Bash(pkill -f \"chrome-profile-test\")"
     ],
     "additionalDirectories": [
       "/tmp"
