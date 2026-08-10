@@ -863,21 +863,27 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
 }
 .promo-duo-panel {
   display: grid;
-  grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
-  gap: 1.1rem;
+  grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
+  gap: 1.25rem;
   align-items: start;
   min-width: 0;
+}
+.promo-duo-panel:not(.promo-duo-panel--divider) {
+  grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
 }
 .promo-duo-panel--divider {
   border-left: 1px solid rgba(255,255,255,0.25);
   padding-left: 2.5rem;
 }
 .promo-duo-media {
-  align-self: stretch;
-  min-height: 110px;
+  align-self: start;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+  aspect-ratio: 600 / 315;
+}
+.promo-duo-panel--divider .promo-duo-media {
+  aspect-ratio: 1672 / 941;
 }
 .promo-duo-media img {
   width: 100%;
@@ -953,19 +959,9 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
 }
 
 @media (max-width: 560px) {
-  .promo-duo-panel {
+  .promo-duo-panel,
+  .promo-duo-panel:not(.promo-duo-panel--divider) {
     grid-template-columns: 1fr;
-  }
-  .promo-duo-media {
-    min-height: 0;
-    aspect-ratio: 600 / 315;
-  }
-  .promo-duo-panel--divider .promo-duo-media {
-    aspect-ratio: 1672 / 941;
-    background: #05131f;
-  }
-  .promo-duo-panel--divider .promo-duo-media img {
-    object-fit: contain;
   }
   .promo-duo-kicker {
     font-size: 0.7rem;

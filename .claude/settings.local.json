@@ -110,7 +110,8 @@
       "Bash(sips -c 220 390 --cropOffset 790 0 /private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/12c46b03-1f5d-4af7-8b8f-baec43322c81/scratchpad/home-mobile.png --out /private/tmp/claude-501/-Users-jordan-springs-pickleball-v2/12c46b03-1f5d-4af7-8b8f-baec43322c81/scratchpad/mobile-crop.png)",
       "Bash(curl -s \"http://localhost:8934/styles.css\")",
       "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --disk-cache-dir=/dev/null --user-data-dir=/tmp/chrome-profile-test --screenshot=home-mobile3.png --window-size=390,1450 \"http://localhost:8934/index.html?v=$\\(date +%s\\)\")",
-      "Bash(pkill -f \"chrome-profile-test\")"
+      "Bash(pkill -f \"chrome-profile-test\")",
+      "Bash(pkill -f \"http.server 893\")"
     ],
     "additionalDirectories": [
       "/tmp"
