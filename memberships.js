@@ -178,8 +178,11 @@ function renderPlans() {
 
     const el = document.createElement('div');
     el.className = ['plan', `plan-${key}`, plan.featured ? 'featured' : ''].filter(Boolean).join(' ');
+    const annualPromo = state.billing === 'annual' && variant.amount > 0
+      ? '<span class="plan-title-promo">First month free until 9/1</span>'
+      : '';
     el.innerHTML = `
-      <h3>${plan.name}</h3>
+      <h3 class="plan-title">${plan.name}${annualPromo}</h3>
       <div class="price">${money(variant.amount)}<small>${variant.label}</small></div>
       ${variant?.name ? `<p class="plan-variant">${variant.name}</p>` : ''}
       ${variant?.billingText ? `<p class="plan-note">${variant.billingText}</p>` : ''}

@@ -2022,6 +2022,24 @@ section.block.alt { background: #f7faf3; border-top: 1px solid #e4ecd9; border-b
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .plan:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,0.08); }
+.plan-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.65rem;
+}
+.plan-title-promo {
+  background: var(--main);
+  border-radius: 999px;
+  color: var(--black);
+  display: inline-flex;
+  font-family: var(--font-head);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.1;
+  padding: 0.28rem 0.65rem;
+  text-transform: uppercase;
+}
 .plan-unlimited_plus {
   grid-column: 2;
 }
