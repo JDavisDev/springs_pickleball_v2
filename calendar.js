@@ -9,6 +9,7 @@
   var WORKER_URL = 'https://springs-pickleball-calendar.jdavisdev.workers.dev';
 
   var DEFAULT_CATEGORY_KEYWORDS = ['social', 'tournament'];
+  var HIDDEN_EVENT_TITLES = ['reconnect marriage and pickleball retreat'];
   var CACHE_KEY = 'sp_calendar_events_v1';
   var CACHE_TTL_MS = 60 * 60 * 1000;
   // CourtReserve's eventlist endpoint errors out above a 120-day window
@@ -74,7 +75,7 @@
   function loadEvents() {
     var cached = readCache();
     if (cached) {
-      state.events = cached.events;
+      state.events = cached.events.filter(function (ev) { return !isHiddenEvent(ev); });
       state.fetchedRange = cached.range;
       buildCategoryFilters();
       return Promise.resolve();
@@ -110,7 +111,9 @@
       .then(function (res) { return res.json(); })
       .then(function (data) {
         state.loading = false;
-        var events = (data.events || []).map(function (ev) { return normalizeEvent(ev, ev.Location); });
+        var events = (data.events || [])
+          .map(function (ev) { return normalizeEvent(ev, ev.Location); })
+          .filter(function (ev) { return !isHiddenEvent(ev); });
         var failedLocations = data.failed || [];
 
         events.sort(function (a, b) { return a.start - b.start; });
@@ -146,6 +149,11 @@
       url: ev.PublicEventUrl || ev.SsoUrl || '#',
       isCanceled: !!ev.IsCanceled
     };
+  }
+
+  function isHiddenEvent(ev) {
+    var title = (ev.title || '').toLowerCase().replace(/&/g, 'and').replace(/\s+/g, ' ').trim();
+    return HIDDEN_EVENT_TITLES.indexOf(title) !== -1;
   }
 
   // ---- Cache ----
